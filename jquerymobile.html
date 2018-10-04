@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>First jQuery Mobile Example</title>
+    <!-- the three things that jQuery Mobile needs to work -->
+    <link rel="stylesheet" href="jquery.mobile-1.4.2/jquery.mobile-1.4.2.css"/>
+    <script src="jquery-1.11.0.js" type="text/javascript"></script>
+    <script src="jquery.mobile-1.4.2/jquery.mobile-1.4.2.js" type="text/javascript"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+    <script>
+      $( document ).ready(function() {
+    // form validering
+    // custom language object
+    var myErrorFeedback = {
+      badInt: 'Please enter a number between 0-10.'
+    }
+    // formvalidator setup function
+    $.validate({
+      // language object overwritten by custom language object
+        language : myErrorFeedback,
+      inputParentClassOnError : 'alert alert-danger' // <- assigning Bootstrap's alert classes to error message container
+      });
+    //prevent form submission
+    $("form").submit(function(event){
+    console.log('Form not submitted!');
+    playGame();
+    
+        event.preventDefault();
+    });
+});
+    </script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <meta name="viewport" content="width=device-width"/>
+</head>
+<body>
+  <section id="firstpage" data-role="page">
+        <header data-role="header" data-rel="back">
+          <h1>Guess A Number</h1>
+        </header>
+        <div class="ui-content">
+          <div id="output" class="text-center alert alert-success" role="alert">I am thinking of a number between 0 and 10...</div>
+      <form method="post">
+        <div class="input-group">
+          <div class="input-group-prepend"> <span class="input-group-text">Number from 0-10:</span> </div>
+          <input id="guess" class="form-control" data-validation="number" data-validation-allowing="range[0;10]" data-validation-error-msg-container="#error-dialog" placeholder="Enter your guess..." autofocus>
+        </div>
+        <!-- http://www.formvalidator.net/#configuration_position -->
+        <div id="error-dialog" class="mt-3"></div>
+        <button id="play" class="mt-3 mb-3 p-3 btn btn-secondary">Guess the magic number!</button>
+      </form>
+      <!-- should be outside the form -->
+      <button id="playAgain" class="mt-3 mb-3 p-3 btn btn-secondary hidden">Play again!</button>
+    </div>
+    <!-- Second column -->
+    <div class="col-lg-6 order-lg-1">
+      <div class="text-center">Try and guess the magic number - you have 3 attempts!</div>
+  
+    </div>
+          <p>This is page 1</p>
+          <p><a href="#secondpage" class="ui-btn">Tic Tac toe</a></p>
+          <p><a href="#thirdpage" class="ui-btn"> Quizz</a></p>
+        </div>
+        <footer data-role="footer" data-position="fixed"><h2>&copy; Funfungames</h2></footer>
+    </section>
+
+    <!-- This is the second page -->
+    <div id="secondpage" data-role="page">
+        <div data-role="header">
+          <a href="#" data-rel="back">Back</a>
+            <h1>Tic Tac Toe</h1>
+        </div>
+        <div class="ui-content" role="main">
+
+            <p>Page 2 has different content on it</p>
+          <div class="container"> 
+  <!-- "Hero" unit -->
+  <div class="jumbotron">
+    <h1 class="display-4 text-center">TIC TAC TOE</h1>
+  </div>
+  <!-- main content -->
+  <div class="row"> 
+    <!-- 2 columns, reordered on medium devices and up --> 
+    <!-- First column -->
+    <div class="col-lg-6 order-lg-2">
+      <table>
+        <tbody>
+          <tr>
+            <td id="1">&nbsp;</td>
+            <td id="2">&nbsp;</td>
+            <td id="3">&nbsp;</td>
+          </tr>
+          <tr>
+            <td id="4">&nbsp;</td>
+            <td id="5">&nbsp;</td>
+            <td id="6">&nbsp;</td>
+          </tr>
+          <tr>
+            <td id="7">&nbsp;</td>
+            <td id="8">&nbsp;</td>
+            <td id="9">&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="msg" class="text-center alert alert-success" role="alert">Click fields to play!</div>
+      <button id="playAgain" class="mt-3 mb-3 p-3 btn btn-secondary hidden">Play it again, Sam!</button>
+    </div>
+    <!-- Second column -->
+    <div class="col-lg-6 order-lg-1">
+      <div class="text-center">2 Player version</div>
+      <hr>
+      <p>Player 1 score: <span id="player1"></span></p>
+      <p>Player 2 score: <span id="player2"></span></p>
+      <p>Draw: <span id="draw"></span></p>
+      <hr>
+     
+    </div>
+  </div>
+  <!-- Container end --> 
+</div>
+            <p><a href="#firstpage" class="ui-btn">Guess A number</a></p>
+            <p><a href="#thirdpage" class="ui-btn">Quizz</a></p>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <h2>&copy; Funfungames</h2>
+        </div>
+    </div>
+    <!-- This is the third page -->
+     <div id="thirdpage" data-role="page">
+        <div data-role="header">
+          <a href="#" data-rel="back">Back</a>
+            <h1>Qiuzz</h1>
+            <h2>Mini Quiz with JavaScript!</h2>
+<p id="question"></p>
+
+<form id="myForm" method="post" onsubmit="return validateAnswer()">
+  <p><input type="text" id="input" placeholder="Type your answer..." autofocus></p>
+  <button type="submit" id="submit">Submit your answer!</button>
+</form>
+
+        </div>
+        <div class="ui-content" role="main">
+            <p>Page 3 has different content on it</p>
+            <p><a href="#firstpage" class="ui-btn">Guess A Number</a></p>
+            <p><a href="#secondpage" class="ui-btn">Tic Tac Toe</a></p>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <h2>&copy; Funfungames</h2>
+        </div>
+    </div>
+
+
+
+
+    <script src="sc.js"></script>
+</body>
+</html>
